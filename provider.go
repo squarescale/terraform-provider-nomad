@@ -7,20 +7,9 @@ import (
 
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
-		Schema: map[string]*schema.Schema{
-			"url": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
-				Default:  "http://discovery.etcd.io/new",
-			},
-		},
+		Schema: map[string]*schema.Schema{},
 		ResourcesMap: map[string]*schema.Resource{
-			"etcdiscovery_token": resourceToken(),
+			"nomad_node": resourceNode(),
 		},
-		ConfigureFunc: providerConfigure,
 	}
-}
-
-func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	return d.Get("url"), nil
 }
